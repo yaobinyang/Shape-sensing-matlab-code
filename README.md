@@ -1,6 +1,7 @@
 # Shape-sensing-matlab-code
 
-This is a matlab shape-sensing code using cosserat rod theory with SDE
+This is a matlab shape-sensing code using cosserat rod theory with SDE.
+
 [Our paper: Cosserat rod-based modeling and stochastic analysis for distributed fiber optics shape-sensing](https://doi.org/10.1016/j.ymssp.2025.113457).
 
 ---
