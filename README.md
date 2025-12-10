@@ -1,25 +1,18 @@
 # Shape-sensing-matlab-code
 
-Short project description (what it does, why it exists, who it’s for).
+This is a matlab shape-sensing code using cosserat rod theory with SDE
+[Our paper: Cosserat rod-based modeling and stochastic analysis for distributed fiber optics shape-sensing](https://doi.org/10.1016/j.ymssp.2025.113457).
 
 ---
 
 ## 🚀 Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- DFOS Shape-sensing based on cosserat rod theory
+- Stochastic model quantifies shape-sensing error propagation.
+- Error bounds for position vectors
 
 ---
 
 ## 🛠️ Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/USERNAME/REPO.git
-
-# Enter the folder
-cd REPO
-
-# Install dependencies (example for Python)
-pip install -r requirements.txt
+Matlab 2020+
