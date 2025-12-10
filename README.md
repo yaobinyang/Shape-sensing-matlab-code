@@ -8,9 +8,9 @@ This is a matlab shape-sensing code using cosserat rod theory with SDE.
 
 ## 🚀 Features
 
-- DFOS Shape-sensing based on cosserat rod theory
+- DFOS Shape-sensing based on cosserat rod theory.
 - Stochastic model quantifies shape-sensing error propagation.
-- Error bounds for position vectors
+- Error bounds for position vectors.
 
 ---
 
@@ -19,4 +19,4 @@ This is a matlab shape-sensing code using cosserat rod theory with SDE.
 Matlab 2020+
 
 ---
-Run nervesesens.m in matlab to see an example of using this code
+Run nervesesens.m in matlab to see an example of using this code.
