@@ -35,8 +35,8 @@ parfor point=1:n_points
     v_k_all(:,point)=v_k;
     Cu_k_all(:,:,point)=Cu_k;
     Cv_k_all(:,:,point)=Cv_k;
-    A_all(:,:,point)=A
-    B_all(:,:,:,point)=B
+    A_all(:,:,point)=A;
+    B_all(:,:,:,point)=B;
 end
 % permutedA=permute(A_all,[3,1,2]);
 % permutedB=permute(B_all,[4,1,2,3]);

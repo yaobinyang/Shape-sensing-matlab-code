@@ -2,7 +2,7 @@ function [A_pq,B_pq_l,u_k,v_k,Cu_k,Cv_k]=nonlin_rod_assymbling_matrixs(R_helix,R
 % disp("now on location s=")
 % disp(s)
 [u_k,v_k]=nonlinear_least_square_solve_darboux(R_helix,R_straight,omega_helix,omega_straight,theta_helix_0,theta_straight_0,n_helix,n_straight,s,u0_k,v0_k,epsilon_p_helix,epsilon_p_straight);
-[Cu_k,Cv_k]=nonlinear_get_error_matrix(R_helix,R_straight,omega_helix,omega_straight,theta_helix_0,theta_straight_0,n_helix,n_straight,s,u0_k,v0_k,u0_k,v0_k);
+[Cu_k,Cv_k]=nonlinear_get_error_matrix(R_helix,R_straight,omega_helix,omega_straight,theta_helix_0,theta_straight_0,n_helix,n_straight,s,u0_k,v0_k,u0_k,v0_k,measure_error_level,spatial_resolution);
 Imat=eye(3);
 Zmat=zeros(3,3);
 A_pq=[Zmat,Imat*v_k(1),Imat*v_k(2),Imat*v_k(3);...
@@ -17,4 +17,4 @@ for l=1:n_helix+n_straight
     Zmat,-Imat*Cu_k(3,l),Zmat,Imat*Cu_k(1,l);...
     Zmat,Imat*Cu_k(2,l),-Imat*Cu_k(1,l),Zmat];
 end
-B_pq_l=B_pq_l*measure_error_level*sqrt(spatial_resolution);
+B_pq_l=B_pq_l;

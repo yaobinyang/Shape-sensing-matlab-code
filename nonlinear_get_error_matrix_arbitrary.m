@@ -1,13 +1,15 @@
 function [Cu_k,Cv_k]=nonlinear_get_error_matrix_arbitrary(R_cables,omega_cables,theta_cables,n_cables,s,u0_k,v0_k,u_k,v_k,measure_error_level,spatial_resolution)
-helpmat=zeros([n_cables,6]);
 unknownerrorlevel=0;
+if measure_error_level>1e-12
+    unknownerrorlevel=2e-2/(measure_error_level*sqrt(spatial_resolution));
+end
 helpmat=zeros([n_cables,6]);
 for cable=1:n_cables
     omega=omega_cables(cable);
     theta=theta_cables(cable);
     R=R_cables(cable);
     [pe_pu, pe_pv]=partial_cablestrain_partial_darboux(R,omega,theta,s,u0_k, v0_k, u_k, v_k);
-    helpmat(cable,:)=[pe_pu;pe_pv]/(measure_error_level*sqrt(spatial_resolution));
+    helpmat(cable,:)=[pe_pu;pe_pv];
     % helpmat(cable,:)=[pe_pu;pe_pv];
 end
 if n_cables>1
@@ -84,4 +86,6 @@ helpmat1=inv(helpmat);
 Cu_k=[helpmat1(1,:);zeros(2,1)];
 Cv_k=[zeros(3,1)];
 end
+Cu_k=Cu_k*(measure_error_level*sqrt(spatial_resolution));
+Cv_k=Cv_k*(measure_error_level*sqrt(spatial_resolution));
 end

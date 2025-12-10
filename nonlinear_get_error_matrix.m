@@ -1,6 +1,9 @@
-function [Cu_k,Cv_k]=nonlinear_get_error_matrix(R_helix,R_straight,omega_helix,omega_straight,theta_helix_0,theta_straight_0,n_helix,n_straight,s,u0_k,v0_k,u_k,v_k)
+function [Cu_k,Cv_k]=nonlinear_get_error_matrix(R_helix,R_straight,omega_helix,omega_straight,theta_helix_0,theta_straight_0,n_helix,n_straight,s,u0_k,v0_k,u_k,v_k,measure_error_level,spatial_resolution)
 helpmat=zeros([n_helix+n_straight,6]);
-unknownerrorlevel=0e3;
+unknownerrorlevel=0;
+if measure_error_level>1e-12
+    unknownerrorlevel=1e-2/(measure_error_level*sqrt(spatial_resolution));
+end
 for helix=1:n_helix
     theta=theta_helix_0+2*pi*(helix-1)'/n_helix;
     [pe_pu, pe_pv]=partial_cablestrain_partial_darboux(R_helix,omega_helix,theta,s,u0_k, v0_k, u_k, v_k);
@@ -85,4 +88,6 @@ helpmat1=inv(helpmat);
 Cu_k=[helpmat1(1,:);zeros(2,1)];
 Cv_k=[zeros(3,1)];
 end
+Cu_k=Cu_k*measure_error_level*sqrt(spatial_resolution);
+Cv_k=Cv_k*measure_error_level*sqrt(spatial_resolution);
 end
