@@ -17,3 +17,6 @@ This is a matlab shape-sensing code using cosserat rod theory with SDE.
 ## 🛠️ Installation
 
 Matlab 2020+
+
+---
+Run nervesesens.m in matlab to see an example of using this code
