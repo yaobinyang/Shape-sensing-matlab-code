@@ -14,7 +14,7 @@ R_cable=sqrt((5.031/2)^2+(4.745/2)^2)*1e-3; %%radius of all cables
 theta_cable=atan(5.031/4.745);%%angle of the starting cables
 R_cables=[R_cable R_cable R_cable];% radius of all cables
 omega_cables=[0,0,0];% helical celocity of all cables
-theta_cables=[theta_cable-1*pi/2 -theta_cable-pi/2 -theta_cable+pi/2]; % starting phases of all cables
+theta_cables=[-theta_cable+1*pi/2 theta_cable+pi/2 +theta_cable-pi/2]; % starting phases of all cables
 n_cables =3;% number of cables
 %% Stochastic 
 measure_error_level=20e-6;%% measurement error in strain [1]
