@@ -32,13 +32,14 @@ n_substep=1;%% number of substep for each step of integration, e.g. in RK45
 %% preprocessing of the raw OFDR data
 readnervesensvithvideo;
 %% prepare the video writer
-vw = VideoWriter("nervesens.avi");
-vw.FrameRate=10/0.6;
-vw_together = VideoWriter("nervesens_together.avi");
-vw_together.FrameRate=10/0.6;
+framerate=1;
+vw = VideoWriter("nervesens");
+vw.FrameRate=framerate/0.6;
+vw_together = VideoWriter("nervesens_together");
+vw_together.FrameRate=framerate/0.6;
 open(vw)
 open(vw_together)
-k_frame_inter=10;
+k_frame_inter=100;
 n_points=length(s_all);
 %% read the video and apply the affine transformation
 vidObj = VideoReader("nervesenswithvideo/00000.MTS");
@@ -49,11 +50,11 @@ movpt=[702 1048; 1158 1053; 1057 133; 871 131];
 fixpt=[702 1048; 702+width 1048; 702+width 1048-lengthim; 702 1048-lengthim];
 tform = fitgeotform2d(movpt,fixpt,"projective");
 invtform = invert(tform);
-framerate=100;
+
 frameid=0;
 %% loop for all frames
-% for k = 1:k_frame_inter:length(time4)
-for k = [1362 2481 4122 4841 5432 5982]
+for k = 1:k_frame_inter:length(time4)
+% for k = [1362 2481 4122 4841 5432 5982]
     slicetimeid=k
     %% interpolation
     % interpolation of the DFOS data, usually necessary unless the data is
@@ -75,11 +76,11 @@ for k = [1362 2481 4122 4841 5432 5982]
     % strainl1=interp1(loc_strainl1,reading_strainl1,s_all*loc_strainl1(end)/s_all(end));
     strainl2=interp1(loc_strainl2,reading_strainl2,s_all*loc_strainl2(end)/s_all(end));
     nans=isnan(strainl2);
-    strainl2(nans) = interp1(s_all(~nans), strainl2(~nans), s_all(nans));
+    strainl2(nans) = interp1(s_all(~nans), strainl2(~nans), s_all(nans),"linear","extrap");
     nans=isnan(strainu1);
-    strainu1(nans) = interp1(s_all(~nans), strainu1(~nans), s_all(nans));
+    strainu1(nans) = interp1(s_all(~nans), strainu1(~nans), s_all(nans),"linear","extrap");
     nans=isnan(strainu2);
-    strainu2(nans) = interp1(s_all(~nans), strainu2(~nans), s_all(nans));
+    strainu2(nans) = interp1(s_all(~nans), strainu2(~nans), s_all(nans),"linear","extrap");
     cable_strain_all=[strainu2;strainu1;strainl2]*1e-6;
     %% meat of this code
     plot_figure_id=0;% =0 for no loptting, specify a number for figure number
@@ -163,7 +164,7 @@ for k = [1362 2481 4122 4841 5432 5982]
             writeVideo(vw_together,frame)
             xlabel("$x$ [m]",'interpreter',"latex")
             ylabel("$y$ [m]",'interpreter',"latex")
-            saveas(gcf,sprintf("Current Time = %.3f sec.pdf",vidObj.CurrentTime))
+            % saveas(gcf,sprintf("Current Time = %.3f sec.pdf",vidObj.CurrentTime))
             % pause(0.01/vidObj.FrameRate)
             break
         end

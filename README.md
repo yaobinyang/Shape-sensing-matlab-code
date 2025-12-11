@@ -20,3 +20,5 @@ Matlab 2020+
 
 ---
 Run nervesesens.m in matlab to see an example of using this code.
+
+[![Watch the Shape Sensing Short Video on YouTube](https://img.youtube.com/vi/V-f6sZhzwOA/maxresdefault.jpg)](https://www.youtube.com/shorts/V-f6sZhzwOA)
