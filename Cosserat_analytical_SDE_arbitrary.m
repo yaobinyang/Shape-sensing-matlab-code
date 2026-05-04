@@ -23,7 +23,7 @@ B_all=zeros(n_measure,12,12,n_points);
 MSE_all=zeros(1,n_points);
 r_all=rod_axis_rs;
 D_ik_all=D0_ik_all;
-parfor point=1:n_points
+for point=1:n_points
     % point
     s=s_all(point);
     epsilon_p_cables=cables_strain_all(:,point);
